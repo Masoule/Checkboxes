@@ -97,8 +97,16 @@
   const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
 
   let lastClicked;
-  
   function handleClick(e) {
+    let between = false;
+    if (this.checked && e.shiftKey ) {
+      checkboxes.forEach( checkbox => {
+        if ( checkbox === lastClicked || checkbox === this ) {
+          between = !between;
+        }
+        if (between) checkbox.checked = true;
+      })
+    }
     lastClicked = this;
   }
 
